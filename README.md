@@ -40,12 +40,19 @@ print(t2x2.summary())
 ```python
 import math
 
+#a=992, b=2260, c=165, d=1017
+#a=85, b=22, c=417, d=602
 #a=602, b=417, c=22, d=85
+
+#obs = np.array([[602, 417], [22, 85]])
+#print(obs[0,0], obs[0,1], obs[1,0], obs[1,1])
+
 a = ct[0][0]
 b = ct[1][0]
 c = ct[0][1]
 d = ct[1][1]
 print(ct)
+
 
 odds_ratio = ((a/c)/(b/d))
 print ("odds_ratio:", odds_ratio)
