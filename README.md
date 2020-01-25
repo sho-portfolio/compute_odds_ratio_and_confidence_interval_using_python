@@ -36,14 +36,54 @@ print(t2x2.summary())
 # LCB and UCB are the lower and upper confidence index values at 95%
 ```
 
-### get the odds ratio, confidence interval (upper and lower) and p-value using the statsmodels library
+### get the odds ratio, confidence interval @ 90%, 95%, 99% (upper and lower) manually
+```python
+import math
 
+#a=602, b=417, c=22, d=85
+a = ct[0][0]
+b = ct[1][0]
+c = ct[0][1]
+d = ct[1][1]
+print(ct)
+
+odds_ratio = ((a/c)/(b/d))
+print ("odds_ratio:", odds_ratio)
+
+log_odds_ratio = math.log(odds_ratio)
+#print(log_odds_ratio)
+
+standard_error_log_odds_ratio = math.sqrt(1/a+1/b+1/c+1/d)
+# print(standard_error_log_odds_ratio)
+
+# https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/find-critical-values/
+critical_value_90_aka_zscore = 1.645
+critical_value_95_aka_zscore = 1.96
+critical_value_99_aka_zscore = 2.575
+
+ci_upper_90 = math.exp(math.log(odds_ratio) + critical_value_90_aka_zscore * standard_error_log_odds_ratio)
+ci_lower_90 = math.exp(math.log(odds_ratio) - critical_value_90_aka_zscore * standard_error_log_odds_ratio)
+print("ci_lower_90:", ci_lower_90)
+print("ci_upper_90:", ci_upper_90)
+
+ci_upper_95 = math.exp(math.log(odds_ratio) + critical_value_95_aka_zscore * standard_error_log_odds_ratio)
+ci_lower_95 = math.exp(math.log(odds_ratio) - critical_value_95_aka_zscore * standard_error_log_odds_ratio)
+print("ci_lower_95:", ci_lower_95)
+print("ci_upper_95:", ci_upper_95)
+
+ci_upper_99 = math.exp(math.log(odds_ratio) + critical_value_99_aka_zscore * standard_error_log_odds_ratio)
+ci_lower_99 = math.exp(math.log(odds_ratio) - critical_value_99_aka_zscore * standard_error_log_odds_ratio)
+print("ci_lower_99:", ci_lower_99)
+print("ci_upper_99:", ci_upper_99)
+```
 
 
 
 ### helpful resources & thanks
 - https://stackoverflow.com/questions/43261747/a-better-way-to-calculate-odd-ratio-in-pandas
 - https://select-statistics.co.uk/calculators/confidence-interval-calculator-odds-ratio/
+- https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/find-critical-values/
+- http://sphweb.bumc.bu.edu/otlt/MPH-Modules/PH717-QuantCore/PH717_ComparingFrequencies/PH717_ComparingFrequencies8.html
 
 ### resources that may enhance my code (to be looked at later)
 - https://fangya18.com/2018/10/20/odds-ratio/
